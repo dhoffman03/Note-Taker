@@ -6,7 +6,7 @@ html.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/notes.html'))
 });
 
-// GET route for homepage
+// Fallback route for when pathing issues occur
 html.get('*', (req, res) =>{
     res.sendFile(path.join(__dirname, '../public/index.html'))
 });
