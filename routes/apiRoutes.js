@@ -47,11 +47,23 @@ notes.post('/api/notes', (req, res) => {
 });
 
 //BONUS -- DELETE route to delete notes by id
-// 1. readFile 
-// 2. Remove note with given id property
-// 3. writeFile to db.json with updated array of notes
-notes.delete('/api/notes/:id', (req, res) => {
-    res.send('')
-  })
+notes.delete("/api/notes/:id", function (req, res) {
+    // Read all notes from db.json
+    let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+
+    // Variable to hold the given id
+    const deletedNote = req.params.id;
+
+    console.log(`Deleting note with id ${deletedNote}`);
+
+    // Return all notes that do not have the given id of the deleted note
+    data = data.filter((currentNote) => {
+      return currentNote.id != deletedNote;
+    });
+  
+    // Rewrite array of notes to db.json
+    fs.writeFileSync("./db/db.json", JSON.stringify(data));
+    res.json(data);
+  });
 
 module.exports = notes;
