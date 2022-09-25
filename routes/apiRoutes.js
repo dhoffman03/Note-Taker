@@ -47,5 +47,11 @@ notes.post('/api/notes', (req, res) => {
 });
 
 //BONUS -- DELETE route to delete notes by id
+// 1. readFile 
+// 2. Remove note with given id property
+// 3. writeFile to db.json with updated array of notes
+notes.delete('/api/notes/:id', (req, res) => {
+    res.send('')
+  })
 
 module.exports = notes;
